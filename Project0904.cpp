@@ -95,59 +95,67 @@ void main()
     //printf("입력 받은 숫자의 총 합은 : %d입니다.", Count);
 
     // do-while 문
-    //int InputNumber = 0;
-    //int Count = 0;
-    //
-    //do {
-    //    std::cin >> InputNumber;
-    //    Count += InputNumber;
-    //} while (InputNumber != 0);
+    int InputNumber = 0;
+    int SumCount = 0;
+    
+    do {
+        printf("(0 입력시 종료) 숫자를 입력해 주세요 : ");
+        std::cin >> InputNumber;
+        SumCount += InputNumber;
+    } while (InputNumber != 0);
 
-    //printf("입력 받은 숫자의 총 합은 : %d입니다.", Count);
+    printf("입력 받은 숫자의 총 합은 : %d입니다.\n", SumCount);
 
     // 2. 입력 받을 숫자의 구구단 출력해보기 
         
     //int InputNumber = 0;
-    //std::cin >> InputNumber;
+    printf("구구단 수를 입력해주세요 : ");
+    std::cin >> InputNumber;
 
-    //for (int i = 1; i < 10; i++) {
-    //    printf("%d * %d = %d\n", InputNumber, i, InputNumber * i);
-    //}
+    for (int i = 1; i < 10; i++) {
+        printf("%d * %d = %d\n", InputNumber, i, InputNumber * i);
+    }
 
     // 3. 숫자를 하나 입력 받고 입력 받은 수 까지 있는 숫자 중 홀수만 출력하기 
         
     //int InputNumber = 0;
-    //std::cin >> InputNumber;
-    //
-    //for (int i = 1; i <= InputNumber; i+=2) {
-    //    printf("%d\n", i);
-    //}
+    printf("숫자를 입력해 주세요 : ");
+    std::cin >> InputNumber;
+    
+    const int OddCheck = 0b0001;
+    for (int i = 0; i <= InputNumber; i++) {
+        if ((i & OddCheck) != 0)
+            printf("%d\n", i);
+    }
 
     // 4. 1 ~ 100 사이의 숫자 중에 7의 배수만 출력하기
     
-    //for (int i = 1; i <= 100; i++) {
-    //    if (i % 7 == 0)
-    //    {
-    //        printf("%d\n", i);
-    //    }
-    //}
+    printf("1 ~ 100 까지의 7의 배수 모음\n");
+    for (int i = 1; i <= 100; i++) {
+        if (i % 7 == 0)
+        {
+            printf("%d\n", i);
+        }
+    }
      
     // 5. 입력 받은 숫자 만큼의 층을 가진 피라미드 그리기
     
-    int InputNumber = 0;    
+    //int InputNumber = 0;    
+    printf("피라미드의 층수를 정해주세요 : ");
     std::cin >> InputNumber;
-    int Count = InputNumber;
+    int PyramidCount = InputNumber;
+    const int PyramidGround = 2;
 
     for (int i = 0; i < InputNumber; i++) {
-        for (int j = 0; j < Count; j++) {
+        for (int j = 0; j < PyramidCount; j++) {
             printf(" ");
         }
 
-        for (int j = 0; j <= i * 2; j++) {
+        for (int j = 0; j <= i * PyramidGround; j++) {
             printf("*");
         }
         printf("\n");
-        Count--;
+        PyramidCount--;
     }
 }
 
