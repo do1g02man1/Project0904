@@ -1,166 +1,105 @@
 ﻿#include <iostream>
+#include <time.h>
+#include <random>
 
 void main()
 {
-	//int flag = 0b1010;
-	//// 0b0001	= 왼쪽 키
-	//// 0b0010	= 오른쪽 키
-	//// 0b0100	= 위쪽 키
-	//// 0b1000	= 아래쪽 키
-
- //   // And
-	//if ((flag & 0b0010) != 0b0000)
-	//{
-	//	// 오른쪽 키가 눌려져 있다.
-	//}
-	//else
-	//{
- //       // 오른쪽 키가 눌려져 있지 않다.
-	//}
-
- //   // Or
- //   flag = flag | 0b0001;
-
- //   // Xor
- //   int result = flag ^ 0b0001; // 결과 = 0b1011
- //   result = 0b1011 ^ 0b0001; // 결과 = 0b1010
-
- //   flag = 0b1010;
- //   int test = 0b0001;  // 0b0001
- //   test = ~test;       // 0b1110 (왼쪽 키를 제외한 나머지 모두 세팅)
-
- //   // enum : 상수들에게 사람이 알아보기 좋은 이름을 붙여놓은 것
- //   enum Key
- //   {
- //       Up         = 1 << 0,    // 0b0001
- //       Down       = 1 << 1,    // 0b0010
- //       Left       = 1 << 2,    // 0b0100
- //       Right      = 1 << 3     // 0b1000
- //   };
-
- //   int testFlag = Up;
-
- //   if ((flag & Up) != 0)
- //   {
- //       // 위쪽 방향키가 눌려져 있을 때
- //   }
-
-    //const int OddNumber = 0b0001;
-    //
-    //unsigned int InputNumber = 0;
-    //
-    //std::cin >> InputNumber;
-
-    //if ((InputNumber & OddNumber) != 0)
-    //{
-    //    printf("홀수입니다.");
-    //}
-    //else 
-    //{
-    //    printf("짝수입니다.");
-    //}
-    
+    //// C 스타일의 랜덤 사용법
+    ////srand(time(0));
+    //srand(0);
     //for (int i = 0; i < 10; i++)
     //{
-    //    printf("Hello World! for: %d\n", i);
+    //    int RandomNumber = rand();
+    //    printf("랜덤한 숫자 : %d\n", RandomNumber);
     //}
+    //
+    //// 0 ~ 5 까지의 숫자를 랜덤으로 구하고 싶다
+    //int RandomNumber1 = rand() % 6;
 
-    //int Count = 1;
-    //while ((Count % 3) != 0)    // while()의 조건이 참일 때 블럭 실행
-    //{
-    //    printf("Hello World! while: %d\n", Count);
-    //    Count++;
+    //// 1 ~ 6 까지의 숫자를 랜덤으로 구하고 싶다
+    //int RandomNumber2 = rand() % 6 + 1;
+    //
+    //// C++ 스타일
+    //std::random_device RandomDevice;
+    //std::mt19937 Generate(RandomDevice());
+
+    //printf("균등분포 : ");
+    //std::uniform_int_distribution<> uniformDis(1, 100);
+    //for (int i = 0; i < 10; i++) {
+    //    int Number = uniformDis(Generate);
+    //    printf("%d", Number);
+    //    if (i < 9) {
+    //        printf(", ");
+    //    }
     //}
+    //printf("\n");
 
-    //Count = 1;
-    //do {
-    //    printf("Hello World! while: %d\n", Count);
-    //    Count++;
-    //} while ((Count % 3) != 0);
+    //printf("정규분포 : ");
+    //std::normal_distribution<> normalDis(80, 10);
+    //for (int i = 0; i < 10; i++) {
+    //    float fNumber = normalDis(Generate);
+    //    printf("%.2f", fNumber);
+    //    if (i < 9) {
+    //        printf(", ");
+    //    }
+    //}
+    //printf("\n");
 
-    // 1. 0을 입력받을 때 까지 입력을 계속 받고 
-    //    0이 입력되면 입력받은 숫자의 합을 출력하시오.
-    //    while, do-while 모두 해보기
+
+// 1. 주사위를 100만 번 돌려서 6이 몇 번 나왔는지 카운팅해서 출력하기
+    std::random_device RandomDevice;
+    std::mt19937 Generate(RandomDevice());
     
-    // while 문
-    //int InputNumber = -1;
-    //int SumCount = 0;
-    //   
-    //while (InputNumber != 0) {
-    //    std::cin >> InputNumber;
-    //    SumCount += InputNumber;
-    //}
-    //printf("입력 받은 숫자의 총 합은 : %d입니다.", Count);
-
-    // do-while 문
-    int InputNumber = 0;
-    int SumCount = 0;
-
-    do {
-        printf("(0 입력시 종료) 숫자를 입력해 주세요 : ");
-        std::cin >> InputNumber;
-        SumCount += InputNumber;
-    } while (InputNumber != 0);
-
-    printf("입력 받은 숫자의 총 합은 = %d입니다.\n", SumCount);
-
-    // 2. 입력 받은 숫자의 구구단 출력해보기 
+    int RandomCount = 0;
+    std::uniform_int_distribution<> uniformDis(1, 6);
+    for (int i = 0; i < 1000000; i++) {
+        int Number = uniformDis(Generate);
         
-    //int InputNumber = 0;
-    printf("구구단 수를 입력해주세요 : ");
-    std::cin >> InputNumber;
-
-    for (int i = 1; i < 10; i++) {
-        printf("%d * %d = %d\n", InputNumber, i, InputNumber * i);
-    }
-
-    // 3. 숫자를 하나 입력 받고 입력 받은 수 까지 있는 숫자 중 홀수만 출력하기 
-        
-    //int InputNumber = 0;
-    printf("숫자를 입력해 주세요 : ");
-    std::cin >> InputNumber;
-    
-    //const int OddCheck = 0b0001;
-    for (int i = 1; i <= InputNumber; i+=2) {
-        //if ((i & OddCheck) != 0)
-        printf("%d\n", i);
-    }
-
-    // 4. 1 ~ 100 사이의 숫자 중에 7의 배수만 출력하기
-    
-    const int MinNumber = 1;
-    const int MaxNumber = 100;
-    
-
-    printf("1 ~ 100 까지의 7의 배수 모음\n");
-    for (int i = MinNumber; i <= MaxNumber; i++) {
-        if ((i % 7) == 0)
+        if (Number == 6)
         {
-            printf("%d\n", i);
+            RandomCount += Number;
         }
     }
-     
-    // 5. 입력 받은 숫자 만큼의 층을 가진 피라미드 그리기
+    printf("6의 총 합은 : %d", RandomCount);
+
+
+// 2. 가위, 바위, 보 게임 만들기
+//    - 3선승제
+//    - enum 활용
     
-    //int InputNumber = 0;    
-    printf("피라미드의 층수를 정해주세요 : ");
-    std::cin >> InputNumber;
-    const int PyramidGround = 2;
+    enum RockScissorsPaper {
 
-    for (int i = 0; i < InputNumber; i++) {
-        for (int j = 0; j < (InputNumber - (i + 1)); j++) {
-            printf(" ");
+        Scissors    = 0b0001,   
+        Rock        = 0b0010,
+        Paper       = 0b0100
+
+    };
+
+    int UserScore = 0, ComScore = 0;
+    
+    int UserInput = 0;
+
+    srand(time(0));
+    do {
+        printf("안 내면 진 거 가위 바위 보 ! (가위 1, 바위 2, 보 3) ");
+        printf("당신 : %d승, 컴퓨터 : %d승 ", UserScore, ComScore);
+        std::cin >> UserInput;
+        int ComInput = rand() % 3;
+
+        if (ComInput ) {
+
         }
-
-        for (int j = 0; j < i * PyramidGround + 1; j++) {
-            printf("*");
-        }
-        printf("\n");
-    }
-
+    } while (UserScore > 3 || ComScore > 3);
+    
 
 }
-
+// 3. 하이 로우
+//    - 컴퓨터가 1 ~ 100 사이의 임의의 숫자를 선택하고,
+//      사용자가 맞출 때까지 입력을 받아 "더 높게", "더 낮게" 등의 힌트를 제공하는 게임
+//    - 5번 안에 맞춰야 승리 
+// 4. 공포 게임의 인벤토리를 비트 플래그로 표현하기
+//    - 아이템 종류를 나타내는 enum을 만들고 
+//    - 특정 아이템을 추가하고 삭제하는 예시 보여주기 
 
 /*
 
@@ -176,6 +115,29 @@ void main()
 
  do-while   최소 한 번은 무조건 실행해야 할 때 사용. (while과 거의 같음)
 
+*/
+
+/*
+
+ continue 
+   - 반복문 안에서 사용
+   - continue를 만나면 그 이후의 코드는 스킵하고 다음 반복을 진행
+ break
+   - 반복문이나 switch 문에서 해당 반복문을 벗어나거나 case를 종료한다
+
+*/
+
+/*
+
+랜덤
+ - 무작위로 숫자를 선택하는 법
+ - C 스타일
+    - rand();            함수 활용
+    - srand(time(0));    시드값 설정 
+
+ - C++ 스타일
+    - #include <random>
+    - C 스타일보다 많은 기능을 제공한다.
 */
 
 /*
