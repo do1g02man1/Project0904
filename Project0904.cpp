@@ -131,7 +131,7 @@ void main()
     //        printf("%d\n", i);
     //    }
     //}
-    
+     
     // 5. 입력 받은 숫자 만큼의 층을 가진 피라미드 그리기
     
     int InputNumber = 0;    
