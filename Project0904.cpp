@@ -83,30 +83,28 @@ void main()
     //    while, do-while 모두 해보기
     
     // while 문
-    //int InputNumber = 0;
-    //int Count = 0;
-    //
-    //std::cin >> InputNumber;
-    //
+    //int InputNumber = -1;
+    //int SumCount = 0;
+    //   
     //while (InputNumber != 0) {
-    //    Count += InputNumber;
     //    std::cin >> InputNumber;
+    //    SumCount += InputNumber;
     //}
     //printf("입력 받은 숫자의 총 합은 : %d입니다.", Count);
 
     // do-while 문
     int InputNumber = 0;
     int SumCount = 0;
-    
+
     do {
         printf("(0 입력시 종료) 숫자를 입력해 주세요 : ");
         std::cin >> InputNumber;
         SumCount += InputNumber;
     } while (InputNumber != 0);
 
-    printf("입력 받은 숫자의 총 합은 : %d입니다.\n", SumCount);
+    printf("입력 받은 숫자의 총 합은 = %d입니다.\n", SumCount);
 
-    // 2. 입력 받을 숫자의 구구단 출력해보기 
+    // 2. 입력 받은 숫자의 구구단 출력해보기 
         
     //int InputNumber = 0;
     printf("구구단 수를 입력해주세요 : ");
@@ -122,17 +120,21 @@ void main()
     printf("숫자를 입력해 주세요 : ");
     std::cin >> InputNumber;
     
-    const int OddCheck = 0b0001;
-    for (int i = 0; i <= InputNumber; i++) {
-        if ((i & OddCheck) != 0)
-            printf("%d\n", i);
+    //const int OddCheck = 0b0001;
+    for (int i = 1; i <= InputNumber; i+=2) {
+        //if ((i & OddCheck) != 0)
+        printf("%d\n", i);
     }
 
     // 4. 1 ~ 100 사이의 숫자 중에 7의 배수만 출력하기
     
+    const int MinNumber = 1;
+    const int MaxNumber = 100;
+    
+
     printf("1 ~ 100 까지의 7의 배수 모음\n");
-    for (int i = 1; i <= 100; i++) {
-        if (i % 7 == 0)
+    for (int i = MinNumber; i <= MaxNumber; i++) {
+        if ((i % 7) == 0)
         {
             printf("%d\n", i);
         }
@@ -143,20 +145,20 @@ void main()
     //int InputNumber = 0;    
     printf("피라미드의 층수를 정해주세요 : ");
     std::cin >> InputNumber;
-    int PyramidCount = InputNumber;
     const int PyramidGround = 2;
 
     for (int i = 0; i < InputNumber; i++) {
-        for (int j = 0; j < PyramidCount; j++) {
+        for (int j = 0; j < (InputNumber - (i + 1)); j++) {
             printf(" ");
         }
 
-        for (int j = 0; j <= i * PyramidGround; j++) {
+        for (int j = 0; j < i * PyramidGround + 1; j++) {
             printf("*");
         }
         printf("\n");
-        PyramidCount--;
     }
+
+
 }
 
 
