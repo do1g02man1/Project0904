@@ -66,7 +66,7 @@ void main()
 // 2. 가위, 바위, 보 게임 만들기
 //    - 3선승제
 //    - enum 활용
-    
+
     //enum RockScissorsPaper {
 
     //    Scissors,
@@ -203,6 +203,64 @@ void main()
 //
 //    } while (UserInput != 0);
 
+    enum Item {
+        Key = 1 << 0,
+        Fuse = 1 << 1,
+        Book = 1 << 2,
+        Note = 1 << 3,
+    };
+
+    const int ItemCount = 4;
+    int Inventory = 0;
+
+    int PlayerSelect = -1;
+
+    while (PlayerSelect != 3) {
+
+        printf("어떤 일을 할까요 [1]아이템 추가, [2]아이템 삭제, [3]종료 : ");
+        std::cin >> PlayerSelect;
+
+        switch (PlayerSelect) {
+            case 1:
+            {
+                printf("어떤 아이템을 추가할까요? [0]열쇠, [1]퓨즈, [2]책, [3]쪽지 : ");
+                int AddItem = 0;
+                std::cin >> AddItem;
+                Inventory |= (1 << AddItem);
+                break;
+            }
+            case 2:
+            {
+                printf("어떤 아이템을 제거할까요? [0]열쇠, [1]퓨즈, [2]책, [3]쪽지 : ");
+                int RemoveItem = 0;
+                std::cin >> RemoveItem;
+                Inventory &= ~(1 << RemoveItem);
+                break;
+            }
+            case 3:
+                continue;
+
+            default:
+                break;
+        }
+
+        printf("인벤토리 : ");
+        if ((Inventory & Key) != 0) {
+            printf("열쇠 ");
+        }
+        if ((Inventory & Fuse) != 0) {
+            printf("퓨즈 ");
+        }
+        if ((Inventory & Book) != 0) {
+            printf("책 ");
+        }
+        if ((Inventory & Note) != 0) {
+            printf("쪽지 ");
+        }
+        printf("\n");
+    }
+}
+
 
 /*
     주사위 게임 만들기
@@ -230,74 +288,150 @@ void main()
     다음 판 진행
     소지금이 0 이하인 쪽이 나오면 게임 종료.
 */
+    //int PlayerMoney = 10000, ComputerMoney = 10000;
+    //int PlayerDice, ComputerDice;
+    //int SumPlayerDice = 0, SumComputerDice = 0;
+    //int BettingMoney, MinMoney, RoundCount = 1;
 
-    int PlayerMoney = 10000, ComputerMoney = 10000;
-    int PlayerDice, ComputerDice;
-    int SumPlayerDice = 0, SumComputerDice = 0;
-    int BettingMoney, MinMoney, RoundCount = 1;
+    //int WinOrLose = 0;
 
-    int WinOrLose = 0;
+    //srand(time(0));
+    //while (PlayerMoney != 0 && ComputerMoney != 0)
+    //{
+    //    printf("주사위를 굴려주세요. (1 ~ 6)\n\n");
+    //    SumPlayerDice += (PlayerDice = rand() % 6 + 1);
+    //    SumComputerDice += (ComputerDice = rand() % 6 + 1);
 
-    srand(time(0));
-    while (PlayerMoney != 0 && ComputerMoney != 0)
-    {
-        printf("주사위를 굴려주세요. (1 ~ 6)\n\n");
-        SumPlayerDice += (PlayerDice = rand() % 6 + 1);
-        SumComputerDice += (ComputerDice = rand() % 6 + 1);
+    //    printf("플레이어 : %d, 컴퓨터 : %d\n\n", PlayerDice, ComputerDice);
 
-        printf("플레이어 : %d, 컴퓨터 : %d\n\n", PlayerDice, ComputerDice);
+    //    if (PlayerMoney > ComputerMoney) {
+    //        MinMoney = ComputerMoney;
+    //    }
+    //    else {
+    //        MinMoney = PlayerMoney;
+    //    }
 
-        if (PlayerMoney > ComputerMoney) {
-            MinMoney = ComputerMoney;
-        }
-        else {
-            MinMoney = PlayerMoney;
-        }
+    //    if (WinOrLose == 0) {
+    //        do {
+    //            printf("플레이어의 배팅 차례입니다. 원하는 금액을 입력해주세요. ");
+    //            std::cin >> BettingMoney;
+    //        } while (BettingMoney > MinMoney);
+    //    }
+    //    else {
+    //        BettingMoney = rand() % MinMoney + 1;
+    //    }
+    //    PlayerMoney -= BettingMoney;
+    //    ComputerMoney -= BettingMoney;
+    //    printf("배팅 금액은 %d입니다.\n각 플레이어의 남은 금액은 플레이어 : %d, 컴퓨터 : %d입니다.\n\n", BettingMoney, PlayerMoney, ComputerMoney);
+    //    printf("주사위를 굴려주세요. (1 ~ 6)\n");
+    //    SumPlayerDice += (PlayerDice = rand() % 6 + 1);
+    //    SumComputerDice += (ComputerDice = rand() % 6 + 1);
+    //    printf("플레이어 : %d, 컴퓨터 : %d\n\n", PlayerDice, ComputerDice);
 
-        if (WinOrLose == 0) {
-            do {
-                printf("플레이어의 배팅 차례입니다. 원하는 금액을 입력해주세요. ");
-                std::cin >> BettingMoney;
-            } while (BettingMoney > MinMoney);
-        }
-        else {
-            BettingMoney = rand() % MinMoney + 1;
-        }
-        PlayerMoney -= BettingMoney;
-        ComputerMoney -= BettingMoney;
-        printf("배팅 금액은 %d입니다.\n각 플레이어의 남은 금액은 플레이어 : %d, 컴퓨터 : %d입니다.\n\n", BettingMoney, PlayerMoney, ComputerMoney);
-        printf("주사위를 굴려주세요. (1 ~ 6)\n");
-        SumPlayerDice += (PlayerDice = rand() % 6 + 1);
-        SumComputerDice += (ComputerDice = rand() % 6 + 1);
-        printf("플레이어 : %d, 컴퓨터 : %d\n\n", PlayerDice, ComputerDice);
+    //    if (SumPlayerDice > SumComputerDice) {
+    //        printf("플레이어 : %d, 컴퓨터 : %d로 플레이어의 승리입니다.\n\n", SumPlayerDice, SumComputerDice);
+    //        PlayerMoney += BettingMoney * 2;
+    //        WinOrLose = 1;
+    //        SumPlayerDice = 0;
+    //        SumComputerDice = 0;
+    //    }
+    //    else if (SumPlayerDice < SumComputerDice) {
+    //        printf("플레이어 : %d, 컴퓨터 : %d로 컴퓨터의 승리입니다.\n\n", SumPlayerDice, SumComputerDice);
+    //        ComputerMoney += BettingMoney * 2;
+    //        WinOrLose = 0;
+    //        SumPlayerDice = 0;
+    //        SumComputerDice = 0;
+    //    }
+    //    else {
+    //        printf("플레이어 : %d, 컴퓨터 : %d로 비겼습니다.\n\n", SumPlayerDice, SumComputerDice);
+    //        PlayerMoney += BettingMoney;
+    //        ComputerMoney += BettingMoney;
+    //        WinOrLose = rand() % 2;
+    //        SumPlayerDice = 0;
+    //        SumComputerDice = 0;
+    //    }
 
-        if (SumPlayerDice > SumComputerDice) {
-            printf("플레이어 : %d, 컴퓨터 : %d로 플레이어의 승리입니다.\n\n", SumPlayerDice, SumComputerDice);
-            PlayerMoney += BettingMoney * 2;
-            WinOrLose = 1;
-            SumPlayerDice = 0;
-            SumComputerDice = 0;
-        }
-        else if (SumPlayerDice < SumComputerDice) {
-            printf("플레이어 : %d, 컴퓨터 : %d로 컴퓨터의 승리입니다.\n\n", SumPlayerDice, SumComputerDice);
-            ComputerMoney += BettingMoney * 2;
-            WinOrLose = 0;
-            SumPlayerDice = 0;
-            SumComputerDice = 0;
-        }
-        else {
-            printf("플레이어 : %d, 컴퓨터 : %d로 비겼습니다.\n\n", SumPlayerDice, SumComputerDice);
-            PlayerMoney += BettingMoney;
-            ComputerMoney += BettingMoney;
-            WinOrLose = rand() % 2;
-            SumPlayerDice = 0;
-            SumComputerDice = 0;
-        }
+    //    printf("%d번째 판, 각 플레이어의 남은 금액은 플레이어 : %d, 컴퓨터 : %d입니다.\n\n", RoundCount++, PlayerMoney, ComputerMoney);
+    //}
 
-        printf("%d번째 판, 각 플레이어의 남은 금액은 플레이어 : %d, 컴퓨터 : %d입니다.\n\n", RoundCount++, PlayerMoney, ComputerMoney);
-    }
+    //홀짝 게임
+
+    //초기 금액 및 배팅
+    //플레이어는 기본금 100원으로 베팅을 시작한다.
+
+    //홀짝 선택
+    //플레이어가 1(홀)또는 2(짝)을 선택한다.
+
+    //결과 결정
+    //컴퓨터가 랜덤으로 1(홀)또는 2(짝)을 선택한다.
+    //플레이어의 선택과 결과가 일치하면 승리(이기면 배팅금의 2배 획득), 다르면 패배(배팅금 전액 잃음).
+
+    //연속 배팅 선택
+    //승리 시 플레이어는 두 가지 중 하나를 선택 :
+    //(A)이긴 금액을 모두 다시 한 번에 배팅(연승 도전)
+    //(B)이긴 금액을 얻고, 다시 100원부터 새로 배팅 시작
+
+    //게임 종료 조건
+    //플레이어가 소지금이 100원 미만일 경우 게임 종료.
     
-}
+//    const int BettingMoney = 100;
+//
+//    int PlayerMoney = 300;
+//    int PlayerOddEven, ComputerOddEven, GoStop = 0;
+//    int SumBettingMoney = 100, RoundCount = 1, WinCount = 0;
+//
+//    srand(time(0));
+//    while (PlayerMoney > 100) 
+//    {
+//        if (WinCount > 0) {
+//            printf("현재 %d연승중입니다. 베팅 금액은 %d입니다!\n\n", WinCount, SumBettingMoney);
+//        }
+//        else {
+//            printf("베팅 금액은 %d입니다.\n\n", BettingMoney);
+//            PlayerMoney -= SumBettingMoney;
+//        }
+//
+//        printf("현재 플레이어의 소지금 : %d\n\n", PlayerMoney);
+//        ComputerOddEven = rand() % 2 + 1;
+//        printf("컴퓨터 : %d\n\n", ComputerOddEven);
+//        printf("홀짝을 골라주세요. (홀[1], 짝[2]) ");
+//        std::cin >> PlayerOddEven;
+//
+//        if ((PlayerOddEven == 1 && ComputerOddEven == 1) || (PlayerOddEven == 2 && ComputerOddEven == 2)) {
+//            printf("\n플레이어의 승리입니다!\n\n");
+//            printf("묻고 더블로 가시겠습니까? (고[1], 스톱[2]) ");
+//            std::cin >> GoStop;
+//
+//            if (GoStop == 1) {
+//                printf("\n고를 선택하셨습니다.\n\n");
+//                SumBettingMoney *= 2;
+//                WinCount++;
+//            }
+//            else if (GoStop == 2) {
+//                printf("\n스톱을 선택하셨습니다.\n\n");
+//                PlayerMoney += SumBettingMoney * 2;
+//                SumBettingMoney = 100;
+//                WinCount = 0;
+//            }
+//            else {
+//                printf("\n선택지 이외의 숫자를 선택하셨으므로 스톱으로 간주합니다.\n\n");
+//                PlayerMoney += SumBettingMoney * 2;
+//                SumBettingMoney = 100;
+//                WinCount = 0;
+//            }
+//        }
+//        else if (PlayerOddEven == 2 && ComputerOddEven == 1) {
+//            printf("\n플레이어 : 짝, 컴퓨터 : 홀으로 플레이어의 패배입니다...\n\n");
+//            WinCount = 0;
+//        }
+//        else if (PlayerOddEven == 1 && ComputerOddEven == 2) {
+//            printf("\n플레이어: 홀, 컴퓨터 : 짝으로 플레이어의 패배입니다...\n\n");
+//            WinCount = 0;
+//        }
+//        printf("-------------------------------------------------------\n\n");
+//        
+//    }
+//}
 
 /*
 
